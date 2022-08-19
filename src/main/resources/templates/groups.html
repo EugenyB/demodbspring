@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Группы</title>
+</head>
+<body>
+<h1>Groups</h1>
+<form action="add_group" method="post">
+    <label for="gruppa">Новая группа</label>
+    <input id="gruppa" type="text" name="group">
+    <input type="submit" value="Добавить">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Group</th>
+        <th>delete</th>
+        <th>edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="gr : ${grs}">
+        <td th:text="${gr.id}"></td>
+        <td th:text="${gr.name}"></td>
+        <td><a th:href="@{/delete_group/{id}(id=${gr.id})}">delete</a></td>
+        <td><a th:href="@{/edit_group/{id}(id=${gr.id})}">edit</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
