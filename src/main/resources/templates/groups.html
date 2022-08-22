@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Группы</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <h1>Groups</h1>
@@ -18,6 +19,7 @@
         <th>Group</th>
         <th>delete</th>
         <th>edit</th>
+        <th>Students</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +28,7 @@
         <td th:text="${gr.name}"></td>
         <td><a th:href="@{/delete_group/{id}(id=${gr.id})}">delete</a></td>
         <td><a th:href="@{/edit_group/{id}(id=${gr.id})}">edit</a></td>
+        <td><a th:href="@{/students_group/{id}(id=${gr.id})}">Students</a></td>
     </tr>
     </tbody>
 </table>

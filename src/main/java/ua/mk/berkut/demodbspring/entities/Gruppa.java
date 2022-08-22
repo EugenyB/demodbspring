@@ -17,7 +17,7 @@ public class Gruppa {
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "gruppa_id")
-    private List<Student> students = new ArrayList<>();
+    private List<Student> students;
 
     public List<Student> getStudents() {
         return students;

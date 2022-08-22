@@ -12,6 +12,7 @@ import ua.mk.berkut.demodbspring.repositories.GruppaRepository;
 import ua.mk.berkut.demodbspring.repositories.StudentRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -41,6 +42,38 @@ public class DBController {
     public String deleteGroup(@PathVariable("id") int id) {
         gruppaRepository.deleteById(id);
 
+        return "redirect:/groups";
+    }
+
+    @GetMapping("/students_group/{id}")
+    public String showStudentsByGroup(@PathVariable("id") int id, Model model) {
+        Optional<Gruppa> gruppa = gruppaRepository.findById(id);
+        if (gruppa.isEmpty()) {
+            model.addAttribute("message", "Группы с id "+ id + " не найдено");
+            return "error";
+        } else {
+            model.addAttribute("gr", gruppa.get());
+            return "students_by_group";
+        }
+    }
+
+    @GetMapping("/edit_group/{id}")
+    public String showUpdateGroupPage(@PathVariable("id") int id, Model model) {
+        Optional<Gruppa> gruppa = gruppaRepository.findById(id);
+        if (gruppa.isEmpty()) {
+            model.addAttribute("message", "Группы с id "+ id + " не найдено");
+            return "error";
+        } else {
+            model.addAttribute("gr", gruppa.get());
+            return "edit_group";
+        }
+    }
+
+    @PostMapping("/update_group/{id}")
+    public String updateGroup(@PathVariable("id") int id, Gruppa gruppa) {
+        Gruppa gr = gruppaRepository.findById(id).get();
+        gr.setName(gruppa.getName());
+        gruppaRepository.save(gr);
         return "redirect:/groups";
     }
 }
